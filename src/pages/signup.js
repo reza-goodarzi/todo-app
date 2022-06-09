@@ -150,7 +150,7 @@ function Signup() {
             </Button>
             <Typography sx={{ mt: 1.5, textAlign: "center" }}>
               do you have an account?
-              <Link href="/signup">
+              <Link href="/login">
                 <Button sx={{ p: 0, textTransform: "capitalize" }}>Login</Button>
               </Link>
             </Typography>
