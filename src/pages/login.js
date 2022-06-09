@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 
 function Login() {
@@ -22,7 +22,13 @@ function Login() {
         }}
       >
         <Grid item sx={{ width: 400 }}>
-          <TextField fullWidth variant="outlined" type="email" label="Email" />
+          <TextField
+            fullWidth
+            variant="outlined"
+            type="email"
+            label="Email"
+            placeholder="Please enter your email"
+          />
         </Grid>
 
         <Grid item sx={{ width: 400 }}>
@@ -31,7 +37,7 @@ function Login() {
             variant="outlined"
             type="password"
             label="Password"
-            placeholder="Please Enter Your Password"
+            placeholder="Please enter your password"
           />
         </Grid>
 
