@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Backdrop, Box, CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import NewTodo from "../components/NewTodo";
