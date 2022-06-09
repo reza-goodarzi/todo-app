@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLogin } from "../store/user-actions";
+import { fetchLogin } from "../store/user/user-actions";
 
 function Login() {
   const [email, setEmail] = useState("");

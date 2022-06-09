@@ -1,4 +1,4 @@
-import { API_URL, TOKEN } from "../config";
+import { API_URL, TOKEN } from "../../config";
 import { userActions } from "./user-slice";
 
 export const fetchLogin = ({ email, password }) => {

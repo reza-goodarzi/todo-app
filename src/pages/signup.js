@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSignup } from "../store/user-actions";
+import { fetchSignup } from "../store/user/user-actions";
 
 function Signup() {
   const [name, setName] = useState("");

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TOKEN } from "../config";
+import { TOKEN } from "../../config";
 
 let token = "";
 

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import NewTodo from "../components/NewTodo";
 import Todos from "../components/Todos";
-import { getCurrentLoginUser } from "../store/user-actions";
+import { getCurrentLoginUser } from "../store/user/user-actions";
 
 export default function Home() {
   const dispatch = useDispatch();

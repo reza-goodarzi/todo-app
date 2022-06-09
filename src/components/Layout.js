@@ -3,7 +3,7 @@ import { Box, Typography, AppBar, Button, Backdrop, CircularProgress } from "@mu
 import { AccountCircle } from "@mui/icons-material";
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../store/user-actions";
+import { logoutUser } from "../store/user/user-actions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
