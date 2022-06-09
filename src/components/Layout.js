@@ -17,11 +17,11 @@ function Layout({ children, title, desc }) {
 
   const logoutHandler = () => {
     dispatch(logoutUser());
+    setLoading(true);
   };
 
   useEffect(() => {
     if (!token) {
-      setLoading(true);
       router.push("/login");
     }
   }, [token]);
