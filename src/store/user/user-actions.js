@@ -28,7 +28,7 @@ export const fetchLogin = ({ email, password }) => {
         })
       );
     } catch (error) {
-      dispatch(userActions.getError(error.message));
+      dispatch(userActions.setError(error.message));
     }
   };
 };
@@ -70,7 +70,7 @@ export const fetchSignup = ({ name, email, password, age }) => {
         })
       );
     } catch (error) {
-      dispatch(userActions.getError(error.message));
+      dispatch(userActions.setError(error.message));
     }
   };
 };
@@ -95,7 +95,7 @@ export const getCurrentLoginUser = (token) => {
 
       dispatch(userActions.getUser(data));
     } catch (error) {
-      dispatch(userActions.getError(error.message));
+      dispatch(userActions.setError(error.message));
     }
   };
 };
@@ -119,7 +119,7 @@ export const logoutUser = () => {
 
       dispatch(userActions.cleanup());
     } catch (error) {
-      dispatch(userActions.getError(error.message));
+      dispatch(userActions.setError(error.message));
     }
   };
 };

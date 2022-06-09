@@ -31,7 +31,7 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
 
-    getError(state, action) {
+    setError(state, action) {
       localStorage.removeItem(TOKEN);
 
       state.token = "";

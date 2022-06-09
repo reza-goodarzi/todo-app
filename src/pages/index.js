@@ -9,14 +9,14 @@ import { getCurrentLoginUser } from "../store/user/user-actions";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.user);
+  const { user, token } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (state.user || !state.token) {
+    if (user || !token) {
       return;
     }
 
-    dispatch(getCurrentLoginUser(state.token));
+    dispatch(getCurrentLoginUser(token));
   }, []);
 
   return (

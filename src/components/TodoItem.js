@@ -21,10 +21,15 @@ function TodoItem({ todo }) {
         }}
         elevation={1}
       >
-        {/* <Typography sx={{ textDecoration: "line-through  #28aa6c", color: "primary.main" }}> */}
-        <Typography>Todo 1</Typography>
+        <Typography
+          sx={
+            todo.completed ? { textDecoration: "line-through  #28aa6c", color: "primary.main" } : {}
+          }
+        >
+          {todo.description}
+        </Typography>
         <Box>
-          <Checkbox />
+          <Checkbox checked={todo.completed} />
           <IconButton>
             <Delete />
           </IconButton>
@@ -34,7 +39,7 @@ function TodoItem({ todo }) {
         </Box>
       </Paper>
       <Typography sx={{ color: "gray", fontSize: "small", mt: 0.5, ml: 0.5 }}>
-        Last update: 23/04/2022 20:32
+        Last update: {new Date(todo.updatedAt).toLocaleString()}
       </Typography>
     </ListItem>
   );
