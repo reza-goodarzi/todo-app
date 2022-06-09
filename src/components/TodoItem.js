@@ -1,8 +1,28 @@
 import { Delete, Edit } from "@mui/icons-material";
 import { Box, Checkbox, IconButton, ListItem, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteTask, updateTask } from "../store/tasks/tasks-action";
 
 function TodoItem({ todo }) {
+  const dispatch = useDispatch();
+
+  const onDeleteTask = () => {
+    dispatch(deleteTask(todo._id));
+  };
+
+  const onCompletedTask = (e) => {
+    dispatch(
+      updateTask({ id: todo._id, description: todo.description, completed: e.target.checked })
+    );
+  };
+
+  const onChangeDescriptionTask = (e) => {
+    const newDescription = prompt("Change the task", todo.description);
+
+    dispatch(updateTask({ id: todo._id, description: newDescription, completed: todo.completed }));
+  };
+
   return (
     <ListItem
       sx={{
@@ -29,11 +49,11 @@ function TodoItem({ todo }) {
           {todo.description}
         </Typography>
         <Box>
-          <Checkbox checked={todo.completed} />
-          <IconButton>
+          <Checkbox checked={todo.completed} onChange={onCompletedTask} />
+          <IconButton onClick={onDeleteTask}>
             <Delete />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={onChangeDescriptionTask}>
             <Edit />
           </IconButton>
         </Box>

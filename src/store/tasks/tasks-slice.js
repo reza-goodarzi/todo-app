@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PER_PAGE } from "../../config";
 
 const initialState = {
   items: [],
-  pages: 0,
   error: null,
 };
 
@@ -14,18 +12,32 @@ export const tasksSlice = createSlice({
     getTasks(state, action) {
       action.payload.reverse();
       state.items = action.payload;
-      state.pages = Math.ceil(action.payload.length / PER_PAGE);
+
       state.error = null;
     },
     addNewTask(state, action) {
       const newItems = [action.payload, ...state.items];
       state.items = newItems;
-      state.pages = Math.ceil(action.payload.length / PER_PAGE);
+
+      state.error = null;
+    },
+
+    updatedTask(state, action) {
+      const taskIndex = state.items.findIndex((item) => action.payload._id === item._id);
+      state.items[taskIndex].completed = action.payload.completed;
+      state.items[taskIndex].description = action.payload.description;
+      state.items[taskIndex].updatedAt = action.payload.updatedAt;
+
+      state.error = null;
+    },
+
+    deletedTask(state, action) {
+      state.items = state.items.filter((item) => item._id !== action.payload);
+
       state.error = null;
     },
     setError(state, action) {
       state.items = [];
-      state.pages = 0;
       state.error = action.payload;
     },
   },
