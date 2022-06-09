@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSignup } from "../store/user/user-actions";
+import Layout from "../components/Layout";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -48,7 +49,7 @@ function Signup() {
   };
 
   return (
-    <>
+    <Layout title="Signup" desc="Signup to our WEBAPP">
       <form onSubmit={handleSubmit}>
         <Typography
           color="primary"
@@ -68,7 +69,7 @@ function Signup() {
             pb: 4,
           }}
         >
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -81,7 +82,7 @@ function Signup() {
             />
           </Grid>
 
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -94,7 +95,7 @@ function Signup() {
             />
           </Grid>
 
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -107,7 +108,7 @@ function Signup() {
             />
           </Grid>
 
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -120,7 +121,7 @@ function Signup() {
             />
           </Grid>
 
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             {errorMessage && (
               <Typography color="error" sx={{ mb: 1, fontSize: 14 }}>
                 {errorMessage}
@@ -142,7 +143,7 @@ function Signup() {
       <Backdrop open={loading}>
         <CircularProgress size="32px" />
       </Backdrop>
-    </>
+    </Layout>
   );
 }
 

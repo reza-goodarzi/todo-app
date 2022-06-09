@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Layout from "../components/Layout";
 import { fetchLogin } from "../store/user/user-actions";
 
 function Login() {
@@ -35,7 +36,7 @@ function Login() {
   };
 
   return (
-    <>
+    <Layout title="Login" desc="Enter you account and manage your task">
       <form onSubmit={handleSubmit}>
         <Typography
           color="primary"
@@ -55,7 +56,7 @@ function Login() {
             pb: 4,
           }}
         >
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -68,7 +69,7 @@ function Login() {
             />
           </Grid>
 
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             <TextField
               fullWidth
               variant="outlined"
@@ -81,7 +82,7 @@ function Login() {
             />
           </Grid>
 
-          <Grid item sx={{ width: 400 }}>
+          <Grid item sx={{ width: { xs: "90%", sm: 420 } }}>
             {error && (
               <Typography color="error" sx={{ mb: 1, fontSize: 14 }}>
                 {error}
@@ -103,7 +104,7 @@ function Login() {
       <Backdrop open={loading}>
         <CircularProgress size="32px" />
       </Backdrop>
-    </>
+    </Layout>
   );
 }
 
