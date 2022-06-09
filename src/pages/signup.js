@@ -9,7 +9,6 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [age, setAge] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -36,12 +35,6 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login");
-
-    if (password !== confirmPassword) {
-      setErrorMessage("Password do not match!");
-      return;
-    }
 
     if (age > 99 || age < 1) {
       setErrorMessage("Age is not valid!");
@@ -72,6 +65,7 @@ function Signup() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            pb: 4,
           }}
         >
           <Grid item sx={{ width: 400 }}>
@@ -109,19 +103,6 @@ function Signup() {
               placeholder="Please enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </Grid>
-
-          <Grid item sx={{ width: 400 }}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              type="password"
-              label="Confirm Password"
-              placeholder="Please confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
           </Grid>

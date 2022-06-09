@@ -91,7 +91,6 @@ export const getCurrentLoginUser = (token) => {
       if (!res.ok) {
         throw new Error(data.error);
       }
-      console.log({ data });
 
       dispatch(userActions.getUser(data));
     } catch (error) {

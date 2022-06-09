@@ -42,9 +42,6 @@ export const createNewTask = (description) => {
 
       const data = await res.json();
 
-      console.log(data);
-      console.log(res.ok);
-
       if (!res.ok) {
         throw new Error(data.error);
       }

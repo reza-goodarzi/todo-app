@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { AddCircle, AddTask } from "@mui/icons-material";
+import { AddTask } from "@mui/icons-material";
 import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,6 @@ function NewTodo() {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // if (task.trim().length < 5) {
-    //   return;
-    // }
     dispatch(createNewTask(task));
   };
 

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTasks } from "../store/tasks/tasks-action";
 import TodoItem from "./TodoItem";
-import { useRouter } from "next/router";
 
 function Todos() {
   const dispatch = useDispatch();
@@ -12,16 +11,12 @@ function Todos() {
   const { token } = useSelector((state) => state.user);
 
   useEffect(() => {
-    return () => {
-      if (!token) {
-        return;
-      }
+    if (!token) {
+      return;
+    }
 
-      dispatch(getAllTasks(token));
-    };
-  }, [token]);
-
-  console.log(items);
+    dispatch(getAllTasks(token));
+  }, []);
 
   return (
     <List sx={{ width: { xs: "100%", sm: "auto" } }}>
