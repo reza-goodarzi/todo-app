@@ -1,5 +1,7 @@
 import { ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "../store";
 import "../styles/globals.css";
 import theme from "../styles/theme";
 
@@ -18,9 +20,11 @@ function MyApp({ Component, pageProps }) {
     return <></>;
   } else {
     return (
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Provider>
     );
   }
 }
