@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
+import NewTodo from "../components/NewTodo";
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
         <meta name="description" content="Manage your todo's" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      Home
+      <NewTodo />
     </Layout>
   );
 }
