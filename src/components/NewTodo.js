@@ -1,11 +1,26 @@
 import styled from "@emotion/styled";
 import { AddCircle, AddTask } from "@mui/icons-material";
 import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewTask } from "../store/tasks/tasks-action";
 
 function NewTodo() {
+  const [task, setTask] = useState("");
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.tasks);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    // if (task.trim().length < 5) {
+    //   return;
+    // }
+    dispatch(createNewTask(task));
+  };
+
   return (
-    <FormStyle>
+    <FormStyle onSubmit={submitHandler}>
       <Box
         item
         sx={{
@@ -27,6 +42,9 @@ function NewTodo() {
               </InputAdornment>
             ),
           }}
+          required
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
         />
       </Box>
     </FormStyle>

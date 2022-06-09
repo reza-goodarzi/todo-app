@@ -11,8 +11,15 @@ export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    getTask(state, action) {
+    getTasks(state, action) {
+      action.payload.reverse();
       state.items = action.payload;
+      state.pages = Math.ceil(action.payload.length / PER_PAGE);
+      state.error = null;
+    },
+    addNewTask(state, action) {
+      const newItems = [action.payload, ...state.items];
+      state.items = newItems;
       state.pages = Math.ceil(action.payload.length / PER_PAGE);
       state.error = null;
     },
