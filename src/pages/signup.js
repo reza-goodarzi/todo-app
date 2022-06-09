@@ -19,6 +19,21 @@ function Signup() {
 
   const router = useRouter();
 
+  useEffect(() => {
+    setLoading(false);
+
+    if (error) {
+      setErrorMessage(error);
+    }
+  }, [isToggle, error]);
+
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+      setLoading(true);
+    }
+  }, [token, router]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login");
@@ -38,21 +53,6 @@ function Signup() {
 
     dispatch(fetchSignup({ name, email, password, age }));
   };
-
-  useEffect(() => {
-    setLoading(false);
-
-    if (error) {
-      setErrorMessage(error);
-    }
-  }, [isToggle, error]);
-
-  useEffect(() => {
-    if (token) {
-      router.push("/");
-      setLoading(true);
-    }
-  }, [token, router]);
 
   return (
     <>

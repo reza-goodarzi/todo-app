@@ -4,23 +4,16 @@ import { useRouter } from "next/router";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin } from "../store/user-actions";
-import { userActions } from "../store/user-slice";
 
 function Login() {
-  const dispatch = useDispatch();
-  const { isToggle, error, token } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const dispatch = useDispatch();
+  const { isToggle, error, token } = useSelector((state) => state.user);
 
-    setLoading(true);
-
-    dispatch(fetchLogin({ email, password }));
-  };
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(false);
@@ -33,7 +26,13 @@ function Login() {
     }
   }, [token, router]);
 
-  console.log(error);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    dispatch(fetchLogin({ email, password }));
+  };
 
   return (
     <>
