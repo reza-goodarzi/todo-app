@@ -8,8 +8,6 @@ import Todos from "../components/Todos";
 import { getCurrentLoginUser } from "../store/user-actions";
 
 export default function Home() {
-  const [loading, setLoading] = useState(false);
-
   const dispatch = useDispatch();
   const state = useSelector((state) => state.user);
 
@@ -22,17 +20,11 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Layout title="Todo App" desc="Manage your todo's">
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <NewTodo />
-          <Todos />
-        </Box>
-      </Layout>
-
-      <Backdrop open={loading}>
-        <CircularProgress size="32px" />
-      </Backdrop>
-    </>
+    <Layout title="Todo App" desc="Manage your todo's">
+      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <NewTodo />
+        <Todos />
+      </Box>
+    </Layout>
   );
 }
