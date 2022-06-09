@@ -5,7 +5,6 @@ import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../store/user/user-actions";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 function Layout({ children, title, desc }) {
   const [loading, setLoading] = useState(false);
@@ -13,18 +12,10 @@ function Layout({ children, title, desc }) {
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.user);
 
-  const router = useRouter();
-
   const logoutHandler = () => {
     dispatch(logoutUser());
     setLoading(true);
   };
-
-  useEffect(() => {
-    if (!token) {
-      router.push("/login");
-    }
-  }, [token]);
 
   return (
     <>

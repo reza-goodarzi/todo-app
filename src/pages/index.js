@@ -6,10 +6,12 @@ import Layout from "../components/Layout";
 import NewTodo from "../components/NewTodo";
 import Todos from "../components/Todos";
 import { getCurrentLoginUser } from "../store/user/user-actions";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.user);
+  const router = useRouter();
 
   useEffect(() => {
     if (user || !token) {
@@ -18,6 +20,12 @@ export default function Home() {
 
     dispatch(getCurrentLoginUser(token));
   }, []);
+
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+    }
+  }, [token]);
 
   return (
     <Layout title="Todo App" desc="Manage your todo's">
