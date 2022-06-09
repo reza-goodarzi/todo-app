@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin } from "../store/user-actions";
+import { userActions } from "../store/user-slice";
 
 function Login() {
   const dispatch = useDispatch();
@@ -15,11 +16,6 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login");
-
-    if (!email || !password) {
-      return;
-    }
 
     setLoading(true);
 
@@ -36,6 +32,8 @@ function Login() {
       setLoading(true);
     }
   }, [token, router]);
+
+  console.log(error);
 
   return (
     <>

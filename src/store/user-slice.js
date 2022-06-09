@@ -27,14 +27,30 @@ export const userSlice = createSlice({
       state.error = null;
       state.isToggle = !state.isToggle;
     },
+    getUser(state, action) {
+      state.user = action.payload;
+    },
 
     getError(state, action) {
-      localStorage.setItem(TOKEN, "");
+      localStorage.removeItem(TOKEN);
 
       state.token = "";
       state.user = null;
       state.error = action.payload;
       state.isToggle = !state.isToggle;
+    },
+
+    cleanup(state) {
+      localStorage.removeItem(TOKEN);
+
+      state.token = "";
+      state.user = null;
+      state.error = null;
+      state.isToggle = !state.isToggle;
+    },
+
+    cleanErrors(state) {
+      state.error = null;
     },
   },
 });

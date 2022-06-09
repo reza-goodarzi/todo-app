@@ -1,4 +1,4 @@
-import { API_URL } from "../config";
+import { API_URL, TOKEN } from "../config";
 import { userActions } from "./user-slice";
 
 export const fetchLogin = ({ email, password }) => {
@@ -50,7 +50,7 @@ export const fetchSignup = ({ name, email, password, age }) => {
       });
 
       const data = await res.json();
-      "".startsWith();
+
       if (!res.ok) {
         if (
           data.error.startsWith(
@@ -69,6 +69,55 @@ export const fetchSignup = ({ name, email, password, age }) => {
           token: data.token,
         })
       );
+    } catch (error) {
+      dispatch(userActions.getError(error.message));
+    }
+  };
+};
+
+export const getCurrentLoginUser = (token) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(`${API_URL}/users/me`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error);
+      }
+      console.log({ data });
+
+      dispatch(userActions.getUser(data));
+    } catch (error) {
+      dispatch(userActions.getError(error.message));
+    }
+  };
+};
+
+export const logoutUser = () => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(`${API_URL}/users/logout`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error);
+      }
+
+      dispatch(userActions.cleanup());
     } catch (error) {
       dispatch(userActions.getError(error.message));
     }

@@ -1,32 +1,64 @@
-import { Box, Typography, AppBar, Button } from "@mui/material";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Box, Typography, AppBar, Button, Backdrop, CircularProgress } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
-import Link from "next/link";
+import Head from "next/head";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../store/user-actions";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-function Layout({ children }) {
+function Layout({ children, title, desc }) {
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state) => state.user);
+
+  const router = useRouter();
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  };
+
+  useEffect(() => {
+    if (!token) {
+      setLoading(true);
+      router.push("/login");
+    }
+  }, [token]);
+
   return (
     <>
-      <AppBar
-        position="static"
-        sx={{
-          p: "20px",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <AccountCircle sx={{ fontSize: 32 }} />
-          <Typography>Reze Goodazi</Typography>
-        </Box>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <Button sx={{ color: "inherit" }}>Logout</Button>
+      {token && user && (
+        <AppBar
+          position="static"
+          sx={{
+            p: "20px",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <AccountCircle sx={{ fontSize: 32 }} />
+            <Typography>{user.name}</Typography>
+          </Box>
 
-        {/* <Box>
-          <Button sx={{ color: "inherit" }}>Login</Button>
-          <Button sx={{ color: "inherit" }}>Sign In</Button>
-        </Box> */}
-      </AppBar>
+          <Button sx={{ color: "inherit" }} onClick={logoutHandler}>
+            Logout
+          </Button>
+        </AppBar>
+      )}
       <main>{children}</main>
+
+      <Backdrop open={loading}>
+        <CircularProgress size="32px" />
+      </Backdrop>
     </>
   );
 }

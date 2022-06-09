@@ -1,41 +1,63 @@
-import { Box } from "@mui/material";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Backdrop, Box, CircularProgress } from "@mui/material";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import NewTodo from "../components/NewTodo";
 import Todos from "../components/Todos";
-import { parseCookies } from "../helper";
-import { API_URL, TOKEN } from "../config";
+import { TOKEN } from "../config";
+import { getCurrentLoginUser } from "../store/user-actions";
+import { userActions } from "../store/user-slice";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.user);
+
+  const router = useRouter();
+
   useEffect(() => {
-    return () => {
-      fetch(`${API_URL}/users/me`, {
-        headers: {
-          "Content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem(TOKEN)}`,
-        },
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
-    };
-  });
+    // if (!localStorage.getItem(TOKEN)) {
+    // backToLogin();
+    // return;
+    // }
+
+    if (state.user || !state.token) {
+      return;
+    }
+
+    dispatch(getCurrentLoginUser(state.token));
+  }, []);
+
+  // useEffect(() => {
+  //   if (state.error) {
+  //     backToLogin();
+  //   }
+  // }, [state.error]);
+
+  // const backToLogin = () => {
+  //   setLoading(true);
+  //   router.push("/login");
+  //   dispatch(userActions.getError(""));
+  // };
+
+  console.log(state);
 
   return (
-    <Layout>
-      <Head>
-        <title>Todo App</title>
-        <meta name="description" content="Manage your todo's" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <NewTodo />
-        <Todos />
-      </Box>
-    </Layout>
+    <>
+      <Layout title="Todo App" desc="Manage your todo's">
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <NewTodo />
+          <Todos />
+        </Box>
+      </Layout>
+
+      <Backdrop open={loading}>
+        <CircularProgress size="32px" />
+      </Backdrop>
+    </>
   );
 }
